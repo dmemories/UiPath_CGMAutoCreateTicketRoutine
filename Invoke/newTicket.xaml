@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1019,3203</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1019,3349</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>newTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="25">
@@ -70,7 +70,7 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="newTicket" sap:VirtualizedContainerService.HintSize="476,3038" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="newTicket" sap:VirtualizedContainerService.HintSize="476,3184" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:DateTime" Default="[DateTime.Now]" Name="currMonth" />
       <Variable x:TypeArguments="s:DateTime" Default="[DateTime.Now.AddMonths(-1)]" Name="lastMonth" />
@@ -82,13 +82,13 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;[Do newTicket]&quot; + vbCrlf +&quot;in_billCyCleDay : &quot; + in_billCycleDay + vbCrLf + &quot;in_problemDetail : &quot; + in_problemDetail]" />
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" BrowserType="Firefox" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,2815" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="37b2211d63aaa465f143c26ee34ce19a" Selector="&lt;html app='firefox.exe' title='ITServiceDesk' /&gt;" TimeoutMS="[in_timeout]" UiBrowser="[selfBrowser]">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" BrowserType="Firefox" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,2961" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="37b2211d63aaa465f143c26ee34ce19a" Selector="&lt;html app='firefox.exe' title='ITServiceDesk' /&gt;" TimeoutMS="[in_timeout]" UiBrowser="[selfBrowser]">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do Browser" sap:VirtualizedContainerService.HintSize="376,2669" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Do Browser" sap:VirtualizedContainerService.HintSize="376,2815" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="resultDetail" />
             </Sequence.Variables>
@@ -356,6 +356,28 @@
                 </sap2010:ViewStateManager>
               </sap2010:WorkflowViewState.ViewStateManager>
             </Delay>
+            <ui:ClickImage DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click Other Position (Img)" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ClickImage_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:ClickImage.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:ClickImage.CursorPosition>
+              <ui:ClickImage.Image>
+                <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" Profile="Basic" TargetImageBase64="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" />
+              </ui:ClickImage.Image>
+              <ui:ClickImage.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="4f880b9d-5971-45d0-b8ac-1bd0fc248490" TimeoutMS="[in_timeout]">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:ClickImage.Target>
+            </ui:ClickImage>
             <ui:ClickImage ContinueOnError="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click OK (Img)" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ClickImage_1" KeyModifiers="None" MouseButton="BTN_LEFT">
               <ui:ClickImage.CursorPosition>
                 <ui:CursorPosition Position="Center">

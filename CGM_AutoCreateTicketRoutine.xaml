@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="923,1028" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1019,1215" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
       <x:String>System.Activities</x:String>
@@ -68,9 +68,10 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
       <AssemblyReference>System.Management.Automation</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="672,863" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="672,1050" sap2010:WorkflowViewState.IdRef="TryCatch_1">
     <TryCatch.Variables>
       <Variable x:TypeArguments="s:Exception" Name="g_errException" />
     </TryCatch.Variables>
@@ -80,7 +81,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <TryCatch.Try>
-      <Flowchart sap:VirtualizedContainerService.HintSize="634,714" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+      <Flowchart sap:VirtualizedContainerService.HintSize="634,823" sap2010:WorkflowViewState.IdRef="Flowchart_1">
         <Flowchart.Variables>
           <Variable x:TypeArguments="x:String" Name="g_username" />
           <Variable x:TypeArguments="x:String" Name="g_password" />
@@ -92,6 +93,8 @@
           <Variable x:TypeArguments="s:String[]" Name="g_waiveCaseArr" />
           <Variable x:TypeArguments="x:String" Name="g_billCycleDay" />
           <Variable x:TypeArguments="x:Int32" Default="25000" Name="g_timeout" />
+          <Variable x:TypeArguments="x:String" Default="Data\Input\" Name="g_inputDirPath" />
+          <Variable x:TypeArguments="x:String" Default="Data\Output\" Name="g_outputDirPath" />
         </Flowchart.Variables>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -100,13 +103,13 @@
             <av:Point x:Key="ShapeLocation">267,10</av:Point>
             <av:Size x:Key="ShapeSize">60,75</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">297,85 297,135</av:PointCollection>
-            <x:Double x:Key="Height">677.63200000000006</x:Double>
+            <x:Double x:Key="Height">787</x:Double>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <Flowchart.StartNode>
-          <x:Reference>__ReferenceID5</x:Reference>
+          <x:Reference>__ReferenceID6</x:Reference>
         </Flowchart.StartNode>
-        <FlowStep x:Name="__ReferenceID5">
+        <FlowStep x:Name="__ReferenceID6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">197,135</av:Point>
@@ -120,6 +123,25 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+            <Sequence DisplayName="Clear old processes" sap:VirtualizedContainerService.HintSize="454,356" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Process Kill" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="DearLib\DProcess_Kill.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:Boolean" x:Key="in_wantForceKill">False</InArgument>
+                  <InArgument x:TypeArguments="s:String[]" x:Key="in_processArr">[{ "excel" }]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Close Browser" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="DearLib\DBrowser_Close.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="whichBrowser">Firefox</InArgument>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="maxBrowser">20</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
             <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="454,874" sap2010:WorkflowViewState.IdRef="CommentOut_3">
               <ui:CommentOut.Body>
                 <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="418,796" sap2010:WorkflowViewState.IdRef="Sequence_7">
@@ -195,6 +217,14 @@
                 <InArgument x:TypeArguments="x:String">6Az@PuAeWU3voPvi</InArgument>
               </Assign.Value>
             </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="454,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[g_cmitDirPath]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[g_inputDirPath]</InArgument>
+              </Assign.Value>
+            </Assign>
             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Get Bill Process" sap:VirtualizedContainerService.HintSize="454,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Invoke\getBillProcess.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="in_cmitDirPath">[g_cmitDirPath]</InArgument>
@@ -205,16 +235,13 @@
             </ui:InvokeWorkflowFile>
           </Sequence>
           <FlowStep.Next>
-            <FlowDecision x:Name="__ReferenceID1" DisplayName="Found Case" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
-              <FlowDecision.Condition>
-                <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="g_billCaseArr.Length &gt;0 Or g_waiveCaseArr.Length &gt; 0" />
-              </FlowDecision.Condition>
+            <FlowDecision x:Name="__ReferenceID1" Condition="[g_billCaseArr.Length &gt;0 Or g_waiveCaseArr.Length &gt; 0]" DisplayName="Found Case" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <av:Point x:Key="ShapeLocation">262,251</av:Point>
                   <av:Size x:Key="ShapeSize">70,87</av:Size>
-                  <av:PointCollection x:Key="FalseConnector">332,294.5 472,294.5 472,529</av:PointCollection>
+                  <av:PointCollection x:Key="FalseConnector">332,294.5 492,294.5 492,579</av:PointCollection>
                   <av:PointCollection x:Key="TrueConnector">262,294.5 142,294.5 142,379</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -252,18 +279,10 @@
                             </ActivityAction.Argument>
                             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke newTicket workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Invoke\newTicket.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_username">
-                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
-                                </InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">
-                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_billCycleDay" />
-                                </InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">
-                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="problemDetail" />
-                                </InArgument>
-                                <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
-                                  <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
-                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_username">[g_username]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">[g_billCycleDay]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">[problemDetail]</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">[g_timeout]</InArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
                           </ActivityAction>
@@ -275,10 +294,10 @@
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">42,591</av:Point>
                               <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">242,616.5 472,616.5 472,580</av:PointCollection>
+                              <av:PointCollection x:Key="ConnectorLocation">142,642 142,702</av:PointCollection>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Waive Case" sap:VirtualizedContainerService.HintSize="370,246" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[g_waiveCaseArr]">
+                          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Waive Case" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[g_waiveCaseArr]">
                             <ui:ForEach.Body>
                               <ActivityAction x:TypeArguments="x:String">
                                 <ActivityAction.Argument>
@@ -296,23 +315,52 @@
                             </ui:ForEach.Body>
                           </ui:ForEach>
                           <FlowStep.Next>
-                            <FlowStep x:Name="__ReferenceID0">
+                            <FlowStep x:Name="__ReferenceID5">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <av:Point x:Key="ShapeLocation">372,529</av:Point>
+                                  <av:Point x:Key="ShapeLocation">42,702</av:Point>
                                   <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">242,727.5 492,727.5 492,630</av:PointCollection>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:CommentOut DisplayName="End" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_4">
-                                <ui:CommentOut.Body>
-                                  <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_8" />
-                                </ui:CommentOut.Body>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Save Excel (Step 2)" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Invoke\saveExcel.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_inputPath">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_inputDirPath" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_outputPath">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_outputDirPath" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
+                                    <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
+                                  </InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                              </ui:CommentOut>
+                              </ui:InvokeWorkflowFile>
+                              <FlowStep.Next>
+                                <FlowStep x:Name="__ReferenceID0">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <av:Point x:Key="ShapeLocation">392,579</av:Point>
+                                      <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:CommentOut DisplayName="End" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                                    <ui:CommentOut.Body>
+                                      <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_8" />
+                                    </ui:CommentOut.Body>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:CommentOut>
+                                </FlowStep>
+                              </FlowStep.Next>
                             </FlowStep>
                           </FlowStep.Next>
                         </FlowStep>
@@ -332,6 +380,7 @@
         <x:Reference>__ReferenceID2</x:Reference>
         <x:Reference>__ReferenceID3</x:Reference>
         <x:Reference>__ReferenceID4</x:Reference>
+        <x:Reference>__ReferenceID5</x:Reference>
       </Flowchart>
     </TryCatch.Try>
     <TryCatch.Catches>
