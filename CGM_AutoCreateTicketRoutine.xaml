@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1019,1215" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:c="clr-namespace:CoE_Log_Activity;assembly=CoE.Log.Activity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1106,1255" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:c="clr-namespace:CoE_Log_Activity;assembly=CoE.Log.Activity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="68">
       <x:String>System.Activities</x:String>
@@ -97,11 +97,7 @@
           <Variable x:TypeArguments="x:String" Default="\\cmitstorage-a\CSS_RPA_CGM_AutoCreateTicketRoutine\Input\" Name="g_cmitDirPath" />
           <Variable x:TypeArguments="sd:DataTable" Name="g_billTable" />
           <Variable x:TypeArguments="sd:DataTable" Name="g_caseTable" />
-          <Variable x:TypeArguments="x:String" Name="g_logDirPath">
-            <Variable.Default>
-              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Environment.CurrentDirectory + &quot;\Log\&quot;" />
-            </Variable.Default>
-          </Variable>
+          <Variable x:TypeArguments="x:String" Default="[Environment.CurrentDirectory + &quot;\Log\&quot;]" Name="g_logDirPath" />
           <Variable x:TypeArguments="x:String" Default="Invoke\" Name="g_invokeDirPath" />
           <Variable x:TypeArguments="x:String" Name="g_billCycleDay" />
           <Variable x:TypeArguments="s:String[]" Name="g_billCaseArr" />
@@ -132,7 +128,7 @@
               <av:PointCollection x:Key="ConnectorLocation">297,201 297,251</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="496,1930" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -345,11 +341,20 @@
                                   <av:PointCollection x:Key="ConnectorLocation">242,727.5 460,727.5 460,621</av:PointCollection>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Save Excel (Step 2)" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Invoke\saveExcel.xaml">
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Save Excel (Step 2)" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Invoke\saveExcel.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="x:String" x:Key="in_inputPath">[g_inputDirPath]</InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="in_outputPath">[g_outputDirPath]</InArgument>
-                                  <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">[g_timeout]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_inputPath">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_inputDirPath" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_outputPath">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_outputDirPath" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
+                                    <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_username">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
+                                  </InArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
