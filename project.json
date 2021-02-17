@@ -3,10 +3,12 @@
   "description": "",
   "main": "Main.xaml",
   "dependencies": {
+    "CoE.Log.Activity": "[1.0.4]",
+    "UiPath.Credentials.Activities": "[1.1.6479.13204]",
     "UiPath.Excel.Activities": "[2.9.5]",
     "UiPath.Mail.Activities": "[1.9.5]",
     "UiPath.System.Activities": "[20.10.3]",
-    "UiPath.UIAutomation.Activities": "[20.4.3]"
+    "UiPath.UIAutomation.Activities": "[20.12.0-preview]"
   },
   "webServices": [],
   "entitiesStores": [],

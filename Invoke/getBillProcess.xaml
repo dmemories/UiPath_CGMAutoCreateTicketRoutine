@@ -3,12 +3,13 @@
     <x:Property Name="in_cmitDirPath" Type="InArgument(x:String)" />
     <x:Property Name="out_billCycleDay" Type="OutArgument(x:String)" />
     <x:Property Name="out_billCaseArr" Type="OutArgument(s:String[])" />
+    <x:Property Name="out_waiveCycleDay" Type="OutArgument(x:String)" />
     <x:Property Name="out_waiveCaseArr" Type="OutArgument(s:String[])" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1019,2608</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1106,2608</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>getBillProcess_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -85,7 +86,6 @@
       <Variable x:TypeArguments="sd:DataTable" Name="caseTable" />
       <Variable x:TypeArguments="sd:DataTable" Name="billTable" />
       <Variable x:TypeArguments="x:String" Name="endBillStr" />
-      <Variable x:TypeArguments="x:Boolean" Name="doWavie" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -132,15 +132,15 @@
         <InArgument x:TypeArguments="s:String[]">[{}]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim todayStr As String = Today.ToString(&quot;dd&quot;)&#xD;&#xA;Dim indexBillCycle As Integer = 0&#xD;&#xA;Dim indexBill1 As Integer = 1&#xD;&#xA;Dim indexBill2 As Integer = 2&#xD;&#xA;Dim indexBill3 As Integer = 3&#xD;&#xA;Dim indexWaive As Integer = 4&#xD;&#xA;out_doWaive = False&#xD;&#xA;&#xD;&#xA;For i As Integer = 0 To (in_billTable.Rows.Count - 1)&#xD;&#xA;    If (String.IsNullOrEmpty(out_endBillStr)) Then&#xD;&#xA;&#x9;&#x9;Console.WriteLine(in_billTable.Rows(i)(indexBill1).ToString() + &quot; : &quot; + in_billTable.Rows(i)(indexBill2).ToString() + &quot; : &quot; + in_billTable.Rows(i)(indexBill3).ToString())&#xD;&#xA;        If (in_billTable.Rows(i)(indexBill1).ToString() = todayStr) Then&#xD;&#xA;            out_endBillStr = &quot;ENDBILL_1&quot;&#xD;&#xA;        ElseIf (in_billTable.Rows(i)(indexBill2).ToString() = todayStr) Then&#xD;&#xA;            out_endBillStr = &quot;ENDBILL_2&quot;&#xD;&#xA;        ElseIf (in_billTable.Rows(i)(indexBill3).ToString() = todayStr) Then&#xD;&#xA;            out_endBillStr = &quot;ENDBILL_3&quot;&#xD;&#xA;        End If&#xD;&#xA;        If (String.IsNullOrEmpty(out_endBillStr) = False) Then&#xD;&#xA;            out_billCycleDay = in_billTable.Rows(i)(indexBillCycle).ToString()&#xD;&#xA;        End If&#xD;&#xA;    ElseIf (out_doWaive) Then&#xD;&#xA;        Exit For&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;&#x9;If (out_doWaive = False) Then&#xD;&#xA;        If (in_billTable.Rows(i)(indexWaive).ToString() = todayStr) Then&#xD;&#xA;            out_doWaive = True&#xD;&#xA;        End If&#xD;&#xA;    End If&#xD;&#xA;Next" DisplayName="Invoke Code (Check Bill Cycle, Waive)" sap:VirtualizedContainerService.HintSize="671,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim todayStr As String = Today.ToString(&quot;dd&quot;)&#xA;Dim indexBillCycle As Integer = 0&#xA;Dim indexBill1 As Integer = 1&#xA;Dim indexBill2 As Integer = 2&#xA;Dim indexBill3 As Integer = 3&#xA;Dim indexWaive As Integer = 4&#xA;out_waiveCycleDay = &quot;&quot;&#xA;&#xA;For i As Integer = 0 To (in_billTable.Rows.Count - 1)&#xA;    If (String.IsNullOrEmpty(out_endBillStr)) Then&#xA;&#x9;&#x9;Console.WriteLine(in_billTable.Rows(i)(indexBill1).ToString() + &quot; : &quot; + in_billTable.Rows(i)(indexBill2).ToString() + &quot; : &quot; + in_billTable.Rows(i)(indexBill3).ToString())&#xA;        If (in_billTable.Rows(i)(indexBill1).ToString() = todayStr) Then&#xA;            out_endBillStr = &quot;ENDBILL_1&quot;&#xA;        ElseIf (in_billTable.Rows(i)(indexBill2).ToString() = todayStr) Then&#xA;            out_endBillStr = &quot;ENDBILL_2&quot;&#xA;        ElseIf (in_billTable.Rows(i)(indexBill3).ToString() = todayStr) Then&#xA;            out_endBillStr = &quot;ENDBILL_3&quot;&#xA;        End If&#xA;        If (String.IsNullOrEmpty(out_endBillStr) = False) Then&#xA;            out_billCycleDay = in_billTable.Rows(i)(indexBillCycle).ToString()&#xA;        End If&#xA;    ElseIf (String.IsNullOrEmpty(out_waiveCycleDay) = False) Then&#xA;        Exit For&#xA;    End If&#xA;&#xA;&#x9;If (String.IsNullOrEmpty(out_waiveCycleDay)) Then&#xA;        If (in_billTable.Rows(i)(indexWaive).ToString() = todayStr) Then&#xA;            out_waiveCycleDay = in_billTable.Rows(i)(indexBillCycle).ToString()&#xA;        End If&#xA;    End If&#xA;Next" DisplayName="Invoke Code (Check Bill Cycle, Waive)" sap:VirtualizedContainerService.HintSize="671,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="sd:DataTable" x:Key="in_billTable">[billTable]</InArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_endBillStr">[endBillStr]</OutArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_billCycleDay">[out_billCycleDay]</OutArgument>
-        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_doWaive">[doWavie]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_waiveCycleDay">[out_waiveCycleDay]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="671,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;[Check Bill Cycle]&quot; + vbCrLf + &quot;endBillStr : &quot; + endBillStr + vbCrLf + &quot;out_billCycleDay : &quot; + out_billCycleDay + vbCrLf + &quot;doWaive : &quot; + (if(doWavie, &quot;T&quot;, &quot;F&quot;))]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="671,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;[Check Bill Cycle]&quot; + vbCrLf + &quot;endBillStr : &quot; + endBillStr + vbCrLf + &quot;out_billCycleDay : &quot; + out_billCycleDay + vbCrLf + &quot;out_waiveCycleDay : &quot; + out_waiveCycleDay]" />
     <If Condition="[String.IsNullOrEmpty(endBillStr)]" sap:VirtualizedContainerService.HintSize="671,1417" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Else>
         <Sequence sap:VirtualizedContainerService.HintSize="526,1269" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -156,17 +156,17 @@
               <OutArgument x:TypeArguments="s:String[]" x:Key="out_billCaseArr">[out_billCaseArr]</OutArgument>
             </ui:InvokeCode.Arguments>
           </ui:InvokeCode>
-          <If Condition="[doWavie]" sap:VirtualizedContainerService.HintSize="484,312" sap2010:WorkflowViewState.IdRef="If_1">
-            <If.Then>
+          <If Condition="[String.IsNullOrEmpty(out_waiveCycleDay)]" sap:VirtualizedContainerService.HintSize="484,312" sap2010:WorkflowViewState.IdRef="If_1">
+            <If.Else>
               <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim index As Integer = 0&#xA;Dim waiveColName As String = &quot;WAIVE&quot;&#xA;&#xA;For i As Integer = 0 To (in_caseTable.Rows.Count - 1)&#xA;&#x9;If (String.IsNullOrEmpty( in_caseTable.Rows(i)(waiveColName).ToString().Trim() )) Then&#xA;&#x9;&#x9;Exit For&#xA;&#x9;Else&#xA;&#x9;&#x9;ReDim Preserve out_waiveCaseArr(index)&#xA;&#x9;&#x9;out_waiveCaseArr(index) = in_caseTable.Rows(i)(waiveColName).ToString()&#xA;&#x9;&#x9;index = index + 1&#xA;&#x9;End If&#xA;Next" DisplayName="Invoke Code (Assign out_waiveCaseArr)" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
                 <ui:InvokeCode.Arguments>
                   <InArgument x:TypeArguments="sd:DataTable" x:Key="in_caseTable">[caseTable]</InArgument>
                   <OutArgument x:TypeArguments="s:String[]" x:Key="out_waiveCaseArr">[out_waiveCaseArr]</OutArgument>
                 </ui:InvokeCode.Arguments>
               </ui:InvokeCode>
-            </If.Then>
+            </If.Else>
           </If>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;[getBillProcess Return]&quot; + vbCrlf +&#xA;&quot;out_billCycleDay : &quot; + out_billCycleDay]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;[getBillProcess Return]&quot; + vbCrlf +&#xD;&#xA;&quot;out_billCycleDay : &quot; + out_billCycleDay]" />
           <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each (Display BillCase Log)" sap:VirtualizedContainerService.HintSize="484,225" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[out_billCaseArr]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:String">

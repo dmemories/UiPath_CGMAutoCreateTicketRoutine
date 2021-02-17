@@ -1,0 +1,1 @@
+"C:\Users\areeyaph\AppData\Local\UiPath\app-20.10.4\UiRobot.exe" execute --file "C:\Users\areeyaph\Documents\UiPath\UiPath_CGMAutoCreateTicketRoutine-master\CGM_AutoCreateTicketRoutine.xaml"
