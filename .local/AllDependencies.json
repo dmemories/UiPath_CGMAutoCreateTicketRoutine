@@ -3484,15 +3484,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\piyab505\\.nuget\\packages\\": {}
+    "C:\\Users\\areeyaph\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "CGM_AutoCreateTicketRoutine",
       "projectName": "CGM_AutoCreateTicketRoutine",
-      "projectPath": "C:\\Users\\piyab505\\Desktop\\CGM_AutoCreateTicketRoutine\\.local",
-      "packagesPath": "C:\\Users\\piyab505\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\piyab505\\Desktop\\CGM_AutoCreateTicketRoutine\\.local"
+      "projectPath": "C:\\Users\\areeyaph\\Documents\\UiPath\\UiPath_CGMAutoCreateTicketRoutine-master\\.local",
+      "packagesPath": "C:\\Users\\areeyaph\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\areeyaph\\Documents\\UiPath\\UiPath_CGMAutoCreateTicketRoutine-master\\.local"
     },
     "frameworks": {
       "net461": {

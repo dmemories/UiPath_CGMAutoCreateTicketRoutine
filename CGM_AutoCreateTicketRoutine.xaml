@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1106,1255" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:c="clr-namespace:CoE_Log_Activity;assembly=CoE.Log.Activity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="749,1115" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:c="clr-namespace:CoE_Log_Activity;assembly=CoE.Log.Activity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="68">
       <x:String>System.Activities</x:String>
@@ -134,8 +134,8 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <c:Log_Start Messages="{x:Null}" DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="454,22" sap2010:WorkflowViewState.IdRef="Log_Start_1" PathFile="[g_logDirPath]" />
-            <Sequence DisplayName="Clear old processes" sap:VirtualizedContainerService.HintSize="454,356" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <c:Log_Start DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="376,22" sap2010:WorkflowViewState.IdRef="Log_Start_1" Messages="Init" PathFile="[g_logDirPath]" />
+            <Sequence DisplayName="Clear old processes" sap:VirtualizedContainerService.HintSize="376,356" sap2010:WorkflowViewState.IdRef="Sequence_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -154,7 +154,7 @@
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>
-            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="454,874" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="376,51" sap2010:WorkflowViewState.IdRef="CommentOut_3">
               <ui:CommentOut.Body>
                 <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="418,796" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
@@ -212,8 +212,14 @@
                   </Sequence>
                 </Sequence>
               </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:CommentOut>
-            <Sequence DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="454,314" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="376,314" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <Sequence.Variables>
                 <Variable x:TypeArguments="ss:SecureString" Name="sPass" />
               </Sequence.Variables>
@@ -240,7 +246,7 @@
                 </Assign.Value>
               </Assign>
             </Sequence>
-            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Get Bill Process" sap:VirtualizedContainerService.HintSize="454,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Invoke\getBillProcess.xaml">
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Get Bill Process" sap:VirtualizedContainerService.HintSize="376,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Invoke\getBillProcess.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="in_cmitDirPath">[g_cmitDirPath]</InArgument>
                 <OutArgument x:TypeArguments="x:String" x:Key="out_billCycleDay">[g_billCycleDay]</OutArgument>
@@ -249,6 +255,7 @@
                 <OutArgument x:TypeArguments="s:String[]" x:Key="out_waiveCaseArr">[g_waiveCaseArr]</OutArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
+            <c:Log_End DisplayName="Log End" sap:VirtualizedContainerService.HintSize="376,22" sap2010:WorkflowViewState.IdRef="Log_End_2" Messages="Init" PathFile="[g_logDirPath]" />
           </Sequence>
           <FlowStep.Next>
             <FlowDecision x:Name="__ReferenceID1" Condition="[g_billCaseArr.Length &gt;0 Or g_waiveCaseArr.Length &gt; 0]" DisplayName="Found Case" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
@@ -257,7 +264,7 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <av:Point x:Key="ShapeLocation">262,251</av:Point>
                   <av:Size x:Key="ShapeSize">70,87</av:Size>
-                  <av:PointCollection x:Key="FalseConnector">332,294.5 460,294.5 460,599</av:PointCollection>
+                  <av:PointCollection x:Key="FalseConnector">332,294.5 450,294.5 450,584.5</av:PointCollection>
                   <av:PointCollection x:Key="TrueConnector">262,294.5 142,294.5 142,379</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -272,10 +279,21 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Login" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Invoke\login.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_username">[g_username]</InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_password">[g_password]</InArgument>
-                      <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">[g_timeout]</InArgument>
-                      <InArgument x:TypeArguments="x:Boolean" x:Key="in_wantCheckSecure">False</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_username">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_password">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_password" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
+                        <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="in_wantCheckSecure">
+                        <Literal x:TypeArguments="x:Boolean" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_logPath">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_logDirPath" />
+                      </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                   <FlowStep.Next>
@@ -295,11 +313,24 @@
                             </ActivityAction.Argument>
                             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke newTicket workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Invoke\newTicket.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_username">[g_username]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">[g_billCycleDay]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">[problemDetail]</InArgument>
-                                <InArgument x:TypeArguments="x:Boolean" x:Key="in_isWaive">False</InArgument>
-                                <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">[g_timeout]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_username">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_billCycleDay" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="problemDetail" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:Boolean" x:Key="in_isWaive">
+                                  <Literal x:TypeArguments="x:Boolean" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
+                                  <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_logPath">
+                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_logDirPath" />
+                                </InArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
                           </ActivityAction>
@@ -322,11 +353,24 @@
                                 </ActivityAction.Argument>
                                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke newTicket workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Invoke\newTicket.xaml">
                                   <ui:InvokeWorkflowFile.Arguments>
-                                    <InArgument x:TypeArguments="x:String" x:Key="in_username">[g_username]</InArgument>
-                                    <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">[g_waiveCycleDay]</InArgument>
-                                    <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">[problemDetail]</InArgument>
-                                    <InArgument x:TypeArguments="x:Boolean" x:Key="in_isWaive">True</InArgument>
-                                    <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">[g_timeout]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="in_username">
+                                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
+                                    </InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="in_billCycleDay">
+                                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_waiveCycleDay" />
+                                    </InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="in_problemDetail">
+                                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="problemDetail" />
+                                    </InArgument>
+                                    <InArgument x:TypeArguments="x:Boolean" x:Key="in_isWaive">
+                                      <Literal x:TypeArguments="x:Boolean" Value="True" />
+                                    </InArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
+                                      <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
+                                    </InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="in_logPath">
+                                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_logDirPath" />
+                                    </InArgument>
                                   </ui:InvokeWorkflowFile.Arguments>
                                 </ui:InvokeWorkflowFile>
                               </ActivityAction>
@@ -338,7 +382,7 @@
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <av:Point x:Key="ShapeLocation">42,702</av:Point>
                                   <av:Size x:Key="ShapeSize">200,51</av:Size>
-                                  <av:PointCollection x:Key="ConnectorLocation">242,727.5 460,727.5 460,621</av:PointCollection>
+                                  <av:PointCollection x:Key="ConnectorLocation">242,727.5 450,727.5 450,635.5</av:PointCollection>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
                               <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Save Excel (Step 2)" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Invoke\saveExcel.xaml">
@@ -352,8 +396,8 @@
                                   <InArgument x:TypeArguments="x:Int32" x:Key="in_timeout">
                                     <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="g_timeout" />
                                   </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="in_username">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_username" />
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_logPath">
+                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="g_logDirPath" />
                                   </InArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                                 <sap:WorkflowViewStateService.ViewState>
@@ -366,17 +410,20 @@
                                 <FlowStep x:Name="__ReferenceID0">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <av:Point x:Key="ShapeLocation">360,599</av:Point>
-                                      <av:Size x:Key="ShapeSize">200,22</av:Size>
+                                      <av:Point x:Key="ShapeLocation">350,584.5</av:Point>
+                                      <av:Size x:Key="ShapeSize">200,51</av:Size>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <c:Log_End Messages="{x:Null}" DisplayName="Log End" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_End_1" PathFile="[g_logDirPath]">
+                                  <ui:CommentOut DisplayName="End" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                                    <ui:CommentOut.Body>
+                                      <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_11" />
+                                    </ui:CommentOut.Body>
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                  </c:Log_End>
+                                  </ui:CommentOut>
                                 </FlowStep>
                               </FlowStep.Next>
                             </FlowStep>

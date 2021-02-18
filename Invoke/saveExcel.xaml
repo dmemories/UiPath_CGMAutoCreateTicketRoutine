@@ -1,17 +1,17 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="saveExcel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="saveExcel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:c="clr-namespace:CoE_Log_Activity;assembly=CoE.Log.Activity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_inputPath" Type="InArgument(x:String)" />
     <x:Property Name="in_outputPath" Type="InArgument(x:String)" />
     <x:Property Name="in_timeout" Type="InArgument(x:Int32)" />
-    <x:Property Name="in_username" Type="InArgument(x:String)" />
+    <x:Property Name="in_logPath" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1106,2786</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>749,2810</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>saveExcel_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="30">
+    <scg:List x:TypeArguments="x:String" Capacity="60">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -42,10 +42,11 @@
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>CoE_Log_Activity</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="60">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -76,9 +77,11 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>CoE.Log.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="saveExcel" sap:VirtualizedContainerService.HintSize="509,2621" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="saveExcel" sap:VirtualizedContainerService.HintSize="509,2745" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="format_input.xlsx" Name="xcelFileName" />
       <Variable x:TypeArguments="sd:DataTable" Name="ticketTable" />
@@ -89,6 +92,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <c:Log_Start DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="467,22" sap2010:WorkflowViewState.IdRef="Log_Start_1" Messages="SaveExcel" PathFile="[in_logPath]" />
     <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_outputPath + xcelFileName]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="467,157" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_inputPath + xcelFileName]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="467,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;[Copy Excel]&quot; + vbCrlf + &quot;Form : &quot; + in_inputPath + xcelFileName + vbCrLf + &quot;To : &quot; + in_outputPath + xcelFileName]" />
     <Delay mva:VisualBasic.Settings="{x:Null}" DisplayName="Delay 3 seconds" Duration="00:00:03" sap:VirtualizedContainerService.HintSize="467,22" sap2010:WorkflowViewState.IdRef="Delay_1">
@@ -227,12 +231,12 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="True" DisplayName="Type Username" EmptyField="True" sap:VirtualizedContainerService.HintSize="384,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_username.ToUpper()]">
+            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="True" DisplayName="Type Username" EmptyField="True" sap:VirtualizedContainerService.HintSize="384,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="RPACGM13">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3235ecb1-0f73-4415-9f20-a5517966daa9" InformativeScreenshot="7a37eaa5ddc0ea3c352842498d75ff06" Selector="&lt;webctrl name='v_user' tag='INPUT' /&gt;" TimeoutMS="[in_timeout]" WaitForReady="COMPLETE" />
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="True" DisplayName="Type Password" EmptyField="True" sap:VirtualizedContainerService.HintSize="384,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_username.ToUpper()]">
+            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="True" DisplayName="Type Password" EmptyField="True" sap:VirtualizedContainerService.HintSize="384,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="RPACGM13">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8ff18d93-01bc-43e6-9992-e99ea1a4ebd4" InformativeScreenshot="bbdae5c4bd6f705e21a3fee2172ab02b" Selector="&lt;webctrl name='v_passwd' tag='INPUT' /&gt;" TimeoutMS="[in_timeout]" WaitForReady="COMPLETE" />
               </ui:TypeInto.Target>
@@ -344,5 +348,6 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
+    <c:Log_End DisplayName="Log End" sap:VirtualizedContainerService.HintSize="467,22" sap2010:WorkflowViewState.IdRef="Log_End_1" Messages="SaveExcel" PathFile="[in_logPath]" />
   </Sequence>
 </Activity>
